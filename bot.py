@@ -12,7 +12,6 @@ def bot():
     msg = resp.message()
     responded = False
     if 'frase' in incoming_msg:
-        # retorne uma citação
         r = requests.get('https://api.quotable.io/random')
         if r.status_code == 200:
             data = r.json()
@@ -22,10 +21,8 @@ def bot():
         msg.body(quote)
         responded = True
     if 'gato' in incoming_msg or 'gata' in incoming_msg:
-        # retorne uma foto de gato
         msg.media('https://cataas.com/cat')
         responded = True
-    # Retorne dados de um CEP
     if incoming_msg.isnumeric() and len(incoming_msg) == 8:
         cep = request.values.get('Body', '').lower()
         r = requests.get(f'https://viacep.com.br/ws/{cep}/json/')
